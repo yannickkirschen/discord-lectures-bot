@@ -6,7 +6,7 @@
 
     <groupId>sh.yannick.bot</groupId>
     <artifactId>discord-lectures-bot</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>discord-lectures-bot</name>
     <description>A bot that sends the lecture plan in a discord channel.</description>
