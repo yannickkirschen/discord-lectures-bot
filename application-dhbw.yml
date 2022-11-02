@@ -1,0 +1,6 @@
+calendar:
+  url: http://vorlesungsplan.dhbw-mannheim.de/ical.php?uid=${DHBW_ICS_UID}
+
+discord:
+  token: ${DISCORD_TOKEN}
+  channel: ${DISCORD_CHANNEL_ID}

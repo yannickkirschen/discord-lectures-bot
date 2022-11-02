@@ -1,0 +1,42 @@
+name: Automatic Execution
+
+on:
+  schedule:
+    - cron: "0 5 * * 1-5" # At 06:00 AM UTC+1, Monday through Friday
+
+env:
+  SPRING_PROFILES_ACTIVE: ${{ secrets.SPRING_PROFILES_ACTIVE }}
+  DHBW_ICS_UID: ${{ secrets.DHBW_ICS_UID }}
+  DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+  DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Find latest release
+        uses: oprypin/find-latest-tag@v1
+        id: latest
+        with:
+          repository: yannickkirschen/discord-lectures-bot
+          releases-only: true
+
+      - name: Download JAR file
+        uses: robinraju/release-downloader@v1.6
+        with:
+          repository: yannickkirschen/discord-lectures-bot
+          latest: true
+          fileName: discord-lectures-bot-${{ steps.latest.outputs.tag }}.jar
+
+      - name: Run bot
+        run: java -jar discord-lectures-bot-${{ steps.latest.outputs.tag }}.jar

@@ -1,0 +1,10 @@
+calendar:
+  url: # ICS file
+
+# Override default (DE) if you don't want to set this via environment variable.
+#messages:
+#    locale: EN
+
+discord:
+  token: # Discord token
+  channel: # Discord channel ID
